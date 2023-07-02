@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     // 選択画像
     @IBOutlet weak var imageView: UIImageView!
     // 結果表示
-    @IBOutlet var textLabel: UILabel!
+    @IBOutlet var textView: UITextView!
     // 画像認識文字列
     var recognizedStrings: [String] = []
     
@@ -63,7 +63,6 @@ class ViewController: UIViewController {
         let requestHandler = VNImageRequestHandler(cgImage: cgImage)
 
         // テキストを認識するための新しいリクエストを作成
-        // recognizeTextHandlerの作り方調べる クロージャ
         let request = VNRecognizeTextRequest(completionHandler: recognizeTextHandler)
         //　ここで日本語を指定する
         request.recognitionLanguages = ["ja-JP"]
@@ -79,32 +78,35 @@ class ViewController: UIViewController {
     }
     
     /**
+     解析結果の取得処理
      クロージャ
      */
     func recognizeTextHandler(request: VNRequest, error: Error?) {
+        // 画像内のテキスト領域を検出し結果を取得
         guard let observations =
-                request.results as? [VNRecognizedTextObservation] else {
+                request.results as? [VNRecognizedTextObservation] else { // as? 型の確認
             return
         }
-//        let recognizedStrings = observations.compactMap { observation in
-//            // Return the string of the top VNRecognizedText instance.
-//            return observation.topCandidates(1).first?.string
-//        }
+
         let maximumCandidates = 1
-        var recognizedText = ""
+        var recognizedText = "" // 解析結果の文字列
+        
         for observation in observations {
+            // 最も優先度の高い候補の文字列を取得
             guard let candidate = observation.topCandidates(maximumCandidates).first else { continue }
             recognizedText += candidate.string
+            recognizedText += "\n"
         }
         
         // Process the recognized strings.
         setText(text: recognizedText)
     }
     
+    /**
+     解析結果をTextViewにセット
+     */
     func setText(text: String){
-//        self.recognizedStrings = text
-        self.textLabel.text = text
-//        self.textLabel.text = text.joined(separator: ",")
+        self.textView.text = text
     }
     
     
