@@ -18,7 +18,9 @@ class ViewController: UIViewController {
     // 結果表示
     @IBOutlet var textView: UITextView!
     // 画像認識文字列
-    var recognizedStrings: [String] = []
+    var recognizedStrings: String!
+    // 選択画像
+    var selectedUIImage: UIImage!
     
     
     /**
@@ -26,6 +28,7 @@ class ViewController: UIViewController {
      */
     override func viewDidLoad() {
         super.viewDidLoad()
+        textView.backgroundColor = UIColor.white
         // Do any additional setup after loading the view.
     }
 
@@ -107,22 +110,24 @@ class ViewController: UIViewController {
      */
     func setText(text: String){
         self.textView.text = text
+        self.recognizedStrings = text
     }
     
     
     /**
         画面遷移時
      */
-//    override func prepare(
-//        for segue: UIStoryboardSegue,
-//        sender: Any?) {
-//
-//            if let srVC = segue.description as? SearchResultViewController {
-//                // 値を渡す
-//                srVC.recognizedStrings = self.recognizedStrings
-//
-//            }
-//        }
+    override func prepare(
+        for segue: UIStoryboardSegue,
+        sender: Any?) {
+
+            if let resultVC = segue.destination as? ResultViewController {
+                // 値を渡す
+                resultVC.recognizedStrings = self.recognizedStrings
+                resultVC.selectedUIImage = self.selectedUIImage
+
+            }
+        }
 
 }
 
@@ -150,6 +155,7 @@ extension ViewController: UINavigationControllerDelegate, PHPickerViewController
                     // ビューを更新するのでメインスレッドで、プロパティにセット
                     DispatchQueue.main.async {
                         self?.imageView.image = image
+                        self?.selectedUIImage = image
                     }
                 }
             }
