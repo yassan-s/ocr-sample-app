@@ -2,10 +2,6 @@
 //  ViewController.swift
 //  ocr-sample-app
 //
-// 参考サイト
-//【【Swift/PhotoKit】PHPickerViewControllerで画像を取得する方法！写真アプリの操作】
-// https://tech.amefure.com/swift-uikit-photokit
-//
 
 import UIKit
 import PhotosUI
@@ -15,8 +11,6 @@ class ViewController: UIViewController {
     
     // 選択画像
     @IBOutlet weak var imageView: UIImageView!
-    // 結果表示
-    @IBOutlet var textView: UITextView!
     // 画像認識文字列
     var recognizedStrings: String!
     // 選択画像
@@ -28,7 +22,6 @@ class ViewController: UIViewController {
      */
     override func viewDidLoad() {
         super.viewDidLoad()
-        textView.backgroundColor = UIColor.white
         // Do any additional setup after loading the view.
     }
 
@@ -101,33 +94,22 @@ class ViewController: UIViewController {
             recognizedText += "\n"
         }
         
-        // Process the recognized strings.
-        setText(text: recognizedText)
+        // 解析結果をTextViewにセット
+        self.recognizedStrings = recognizedText
     }
-    
-    /**
-     解析結果をTextViewにセット
-     */
-    func setText(text: String){
-        self.textView.text = text
-        self.recognizedStrings = text
-    }
-    
     
     /**
         画面遷移時
      */
-    override func prepare(
-        for segue: UIStoryboardSegue,
-        sender: Any?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
-            if let resultVC = segue.destination as? ResultViewController {
-                // 値を渡す
-                resultVC.recognizedStrings = self.recognizedStrings
-                resultVC.selectedUIImage = self.selectedUIImage
-
-            }
+        // 遷移先のViewControllerのプロパティに渡す値をセット
+        if let resultVC = segue.destination as? ResultViewController {
+            // 値を渡す
+            resultVC.recognizedStrings = self.recognizedStrings
+            resultVC.selectedUIImage = self.selectedUIImage
         }
+    }
 
 }
 
