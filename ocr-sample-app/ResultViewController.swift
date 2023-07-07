@@ -17,16 +17,26 @@ class ResultViewController: UIViewController {
     @IBOutlet var textView: UITextView!
     
 
+    /**
+     初期画面表示
+     */
     override func viewDidLoad() {
         super.viewDidLoad()
+        // 文字の背景色を白色に
         textView.backgroundColor = UIColor.white
-        
+        // 渡ってきた値をセット
         self.textView.text = self.recognizedStrings
         self.imageView.image = self.selectedUIImage
 
     }
     
-
+    /**
+     戻るボタン
+     */
+    @IBAction func dismissModal() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     /*
     // MARK: - Navigation
 

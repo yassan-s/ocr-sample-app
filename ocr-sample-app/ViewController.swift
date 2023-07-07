@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     
     
     /**
-     画面表示
+     初期画面表示
      */
     override func viewDidLoad() {
         super.viewDidLoad()
