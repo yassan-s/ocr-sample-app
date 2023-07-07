@@ -68,7 +68,7 @@
                                 <rect key="frame" x="0.0" y="70" width="393" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                 <items>
-                                    <barButtonItem title="&lt;" id="RQz-Mx-iB9">
+                                    <barButtonItem title="back" id="RQz-Mx-iB9">
                                         <connections>
                                             <action selector="dismissModal" destination="MGI-pX-CEc" id="X2i-SR-6BU"/>
                                         </connections>

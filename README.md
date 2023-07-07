@@ -13,3 +13,4 @@ developer.apple.com
 * [iPhoneで日本語OCR、文字認識が使える](https://qiita.com/john-rocky/items/c8abb7fa7aebdf19d9a3)
 * [Visionを使ってオンデバイスで日本語のテキスト認識を行う](https://zenn.dev/_ds_store/articles/0bb40f96eca3e7#fn-11ac-5)
 * [[Swift][iOS16]画像から日本語OCRをやってみた](https://mixltd.jp/blog/swift_ja_ocr_with_vision_framework/)
+* [【Swift UIKit】モーダルウィンドウの実装方法！segueとpresentの2パターン](https://tech.amefure.com/swift-uikit-modal#head4)
